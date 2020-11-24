@@ -8,11 +8,11 @@
       <v-toolbar-title v-text="title"/>
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
-        <v-btn text to="/" nuxt> Home</v-btn>
-        <v-btn text to="/about" nuxt> About</v-btn>
-        <v-btn text to="/gallery" nuxt> Gallery</v-btn>
-        <v-btn text to="/products" nuxt> Products</v-btn>
-        <v-btn text to="/landscaping" nuxt> Landscaping</v-btn>
+        <v-btn text to="/" nuxt>Home</v-btn>
+        <v-btn text to="/about" nuxt>About</v-btn>
+        <v-btn text to="/gallery" nuxt>Gallery</v-btn>
+        <v-btn text to="/products" nuxt>Products</v-btn>
+        <v-btn text to="/landscaping" nuxt>Landscaping</v-btn>
         <v-menu
           left
           bottom

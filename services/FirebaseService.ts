@@ -8,13 +8,19 @@ export class FirebaseService {
   }
 
   public async retrieveImageData(folderName: string) {
-    const querySnapshot = await this.nuxtFire.firestore.collection(folderName).get();
-    const imageNameList: string[] = []
-    querySnapshot.forEach((doc) => {
-        imageNameList.push(doc.get("image"))
-      }
-    )
-    return await Promise.all(imageNameList.map(async image => await this.nuxtFire.storage.ref('gallery').child(image).getDownloadURL()));
+    try {
+      const querySnapshot = await this.nuxtFire.firestore.collection("images").get();
+      let imageNameList: string[] = []
+      querySnapshot.forEach((doc) => {
+          imageNameList = doc.get(folderName);
+        }
+      )
+      return await Promise.all(imageNameList.map(async image => await this.nuxtFire.storage.ref(folderName).child(image).getDownloadURL()));
+    } catch (e) {
+      console.log(JSON.stringify(e))
+      return Promise.reject(e)
+    }
+
   }
 
 }
