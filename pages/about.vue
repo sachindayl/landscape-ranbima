@@ -71,6 +71,11 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class About extends Vue {
+  head() {
+    return {
+      title: "About"
+    }
+  }
   uniquenessList = [
     'Our products are made from 100% reinforced concrete which is as twice as strong as ordinary concrete mixture.',
     'Made from an advanced concrete mixture invented by Sri Lanka Experts after years of research.',

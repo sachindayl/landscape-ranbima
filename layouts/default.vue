@@ -5,11 +5,39 @@
         v-if="isMobile"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title"/>
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
-        <v-btn text to="/" nuxt> Home </v-btn>
-        <v-btn text to="/about" nuxt> About </v-btn>
+        <v-btn text to="/" nuxt> Home</v-btn>
+        <v-btn text to="/about" nuxt> About</v-btn>
+        <v-btn text to="/gallery" nuxt> Gallery</v-btn>
+        <v-btn text to="/products" nuxt> Products</v-btn>
+        <v-btn text to="/landscaping" nuxt> Landscaping</v-btn>
+        <v-menu
+          left
+          bottom
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              @click="() => {}">
+              <v-list-item-title>English</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              @click="() => {}">
+              <v-list-item-title>සිංහල</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </div>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed app temporary>
@@ -22,30 +50,39 @@
           <v-list-item to="/about">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
+          <v-list-item to="/gallery">
+            <v-list-item-title>Gallery</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/products">
+            <v-list-item-title>Products</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/landscaping">
+            <v-list-item-title>Landscaping</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
     <v-main>
       <v-container>
-        <nuxt />
+        <nuxt/>
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app dark padless>
       <v-card flat tile class="col-12">
         <v-card-text>
           <div>Hot line: 0714275560 / 0778646105 / 0776880916</div>
-          <br />
+          <br/>
           <div>Marketing Manager: Ajith Nanayakkara 0776877871</div>
-          <br />
+          <br/>
           <div>
             Email: tilakajee@landscaperanbima.com / ranbimaart@gmail.com /
             thilakajee@sltnet.lk
           </div>
         </v-card-text>
-        <v-divider />
+        <v-divider/>
         <v-card-text class="text-center">
           <span
-            >&copy; {{ new Date().getFullYear() }} Powered by Technomate
+          >&copy; {{ new Date().getFullYear() }} Powered by Technomate
             Software</span
           >
         </v-card-text>
@@ -55,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
 
 @Component
 export default class Default extends Vue {
