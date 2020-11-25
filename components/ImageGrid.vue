@@ -1,5 +1,10 @@
 <template>
   <div>
+    <ImageViewerDialog
+      :image-dialog.sync="dialog"
+      :images-list.sync="images"
+      :images-index.sync="imageIndex"
+    ></ImageViewerDialog>
     <v-progress-linear
       v-if="loading"
       rounded
@@ -14,7 +19,7 @@
           max-width="300px"
           aspect-ratio="1"
           contain
-        >
+          @click="openDialog(index)">
           <template v-slot:placeholder>
             <v-row
               class="fill-height ma-0"
@@ -36,12 +41,17 @@
 <script lang="ts">
 import {Component, Vue, Prop} from "nuxt-property-decorator";
 import {FirebaseService} from "~/services/FirebaseService";
+import ImageViewerDialog from "~/components/ImageViewerDialog.vue";
 
-@Component
+@Component({
+  components: {ImageViewerDialog}
+})
 export default class ImageGrid extends Vue {
   @Prop({default: ''}) readonly imageFolder!: string
   images: any = []
   loading = false;
+  dialog = false;
+  imageIndex = 0;
 
   async mounted() {
     await this.retrieveImageUrls();
@@ -56,6 +66,11 @@ export default class ImageGrid extends Vue {
       this.images = ["@/assets/8.jpg"]
     }
     this.loading = false;
+  }
+
+  openDialog(index: number) {
+    this.imageIndex = index;
+    this.dialog = true;
   }
 }
 </script>
