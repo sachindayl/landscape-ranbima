@@ -8,55 +8,55 @@
       <v-toolbar-title v-text="title"/>
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
-        <v-btn text to="/" nuxt>Home</v-btn>
-        <v-btn text to="/about" nuxt>About</v-btn>
-        <v-btn text to="/gallery" nuxt>Gallery</v-btn>
-        <v-btn text to="/products" nuxt>Products</v-btn>
-        <v-btn text to="/landscaping" nuxt>Landscaping</v-btn>
-        <v-menu
-          left
-          bottom
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              v-bind="attrs"
-              v-on="on"
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-list-item
-              @click="() => {}">
-              <v-list-item-title>English</v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              @click="() => {}">
-              <v-list-item-title>සිංහල</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+        <v-btn text @click="logEvent('homepage')" to="/" nuxt>Home</v-btn>
+        <v-btn text @click="logEvent('about')" to="/about" nuxt>About</v-btn>
+        <v-btn text @click="logEvent('gallery')" to="/gallery" nuxt>Gallery</v-btn>
+        <v-btn text @click="logEvent('products')" to="/products" nuxt>Products</v-btn>
+        <v-btn text @click="logEvent('landscaping')" to="/landscaping" nuxt>Landscaping</v-btn>
       </div>
+      <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            @click="() => {}">
+            <v-list-item-title>English</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            @click="() => {}">
+            <v-list-item-title>සිංහල</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed app temporary>
       <v-list nav dense>
         <v-list-item-group active-class="text--accent-4">
-          <v-list-item to="/">
+          <v-list-item @click="logEvent('mobile_homepage')" to="/">
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/about">
+          <v-list-item @click="logEvent('mobile_about')" to="/about">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/gallery">
+          <v-list-item @click="logEvent('mobile_gallery')" to="/gallery">
             <v-list-item-title>Gallery</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/products">
+          <v-list-item @click="logEvent('mobile_products')" to="/products">
             <v-list-item-title>Products</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/landscaping">
+          <v-list-item @click="logEvent('mobile_landscaping')" to="/landscaping">
             <v-list-item-title>Landscaping</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
@@ -117,6 +117,16 @@ export default class Default extends Vue {
 
   get isMobile() {
     return this.$vuetify.breakpoint.xs
+  }
+
+  mounted() {
+    this.$fire.analytics;
+  }
+
+  logEvent(pageName: string) {
+    if(process.env.NODE_ENV === 'production') {
+      this.$fire.analytics.logEvent('page_visit', {name: pageName})
+    }
   }
 }
 </script>

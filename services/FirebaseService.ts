@@ -26,7 +26,7 @@ export class FirebaseService {
 
   public async retrieveLandscapeData() {
     try {
-      const querySnapshot = await this.nuxtFire.firestore.collection("landscape").get();
+      const querySnapshot = await this.nuxtFire.firestore.collection("landscape").orderBy("id").get();
       let landscapeDataList: LandscapeInterface[] = []
       querySnapshot.forEach((doc) => {
           landscapeDataList.push({
