@@ -9,7 +9,7 @@ import ImageGrid from "~/components/ImageGrid.vue";
 @Component({
   components: {ImageGrid}
 })
-export default class Gallery extends Vue {
+export default class Products extends Vue {
   head() {
     return {
       title: "Products"

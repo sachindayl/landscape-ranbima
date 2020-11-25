@@ -50,7 +50,11 @@ export default class ImageGrid extends Vue {
   async retrieveImageUrls() {
     this.loading = true;
     const firebaseService = new FirebaseService(this.$fire);
-    this.images = await firebaseService.retrieveImageData(this.imageFolder);
+    if (process.env.NODE_ENV !== 'production') {
+      this.images = await firebaseService.retrieveImageData(this.imageFolder);
+    } else {
+      this.images = ["@/assets/8.jpg"]
+    }
     this.loading = false;
   }
 }

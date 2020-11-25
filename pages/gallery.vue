@@ -3,16 +3,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator";
+import {Component, Prop, Vue} from "nuxt-property-decorator";
 import ImageGrid from "~/components/ImageGrid.vue";
 
 @Component({
   components: {ImageGrid}
 })
 export default class Gallery extends Vue {
-  firebaseStorage = this.$fire.storage
-  firebaseFireStore = this.$fire.firestore
-  images: any = []
+  @Prop({default: ''}) readonly folderKeyword!: string
+  @Prop({default: ''}) readonly pageTitle!: string
 
   head() {
     return {

@@ -4,7 +4,7 @@
       <v-spacer></v-spacer>
       <v-col class="col-12 col-sm-8">
         <v-container>
-          <v-card rounded>
+          <v-card tile>
             <v-carousel cycle height="400" hide-delimiters show-arrows-on-hover>
               <v-carousel-item v-for="(slide, i) in slides" :key="i">
                 <v-sheet :color="colors[i]" height="100%">
@@ -37,7 +37,7 @@
         :key="index"
         class="col-12 col-sm-4"
       >
-        <v-card class="card-style pa-4 ma-2 ma-sm-0">
+        <v-card class="card-style pa-4 ma-2 ma-sm-0" tile>
           <v-card-title> {{ card.title }} </v-card-title>
           <v-card-text>{{ card.text }}</v-card-text>
         </v-card>

@@ -1,15 +1,15 @@
 <template>
-  <ImageGrid :image-folder="'landscape'"></ImageGrid>
+  <ImageGrid :image-folder="$route.query.album"></ImageGrid>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator";
+import {Component, Prop, Vue} from "nuxt-property-decorator";
 import ImageGrid from "~/components/ImageGrid.vue";
 
 @Component({
   components: {ImageGrid}
 })
-export default class Gallery extends Vue {
+export default class Browse extends Vue {
   head() {
     return {
       title: "Landscaping"
