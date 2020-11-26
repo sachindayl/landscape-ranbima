@@ -4,7 +4,7 @@
       v-if="loading"
       rounded
       indeterminate
-      color="secondary darken-2"
+      color="accent"
     ></v-progress-linear>
     <v-row>
       <v-col class="col-12">
@@ -17,7 +17,13 @@
     </v-row>
     <v-row>
       <v-col v-for="(land, index) in landscapeList" :key="land + index" class="col-12 col-sm-6">
-        <v-card class="pa-4" :to="{path: '/landscaping/browse', query: {album:land.keyword}}" tile>
+        <v-sheet
+          color="accent"
+          elevation="2"
+          class="pb-2"
+          tile
+        >
+        <v-card elevation="0" class="pa-4" :to="{path: '/landscaping/browse', query: {album:land.keyword}}" tile>
           <v-row>
             <v-col class="col-6">
               <v-img
@@ -40,6 +46,7 @@
           </v-row>
           <v-card-title>{{ land.title }}</v-card-title>
         </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
     <v-row>
@@ -52,7 +59,13 @@
     </v-row>
     <v-row>
       <v-col class="col-6 col-sm-3" v-for="(grass, index) in grassList" :key="grass+index">
-        <v-card class="pa-4" min-height="300px" tile>
+        <v-sheet
+          color="accent"
+          elevation="2"
+          class="pb-2"
+          tile
+        >
+        <v-card elevation="0" class="pa-4" min-height="300px" tile>
           <v-img
             :src="grass.image"
             max-height="175px"
@@ -62,6 +75,7 @@
           ></v-img>
           <v-card-title>{{grass.title}}</v-card-title>
         </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
   </div>

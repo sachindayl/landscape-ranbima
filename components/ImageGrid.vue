@@ -9,7 +9,7 @@
       v-if="loading"
       rounded
       indeterminate
-      color="secondary darken-2"
+      color="accent"
     ></v-progress-linear>
     <v-row v-else>
       <v-col v-for="(image,index) in images" :key="index + image" class="col-6 col-sm-3">

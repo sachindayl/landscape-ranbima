@@ -2,7 +2,13 @@
   <v-container>
     <v-row>
       <v-col class="col-12 col-sm-6">
-        <v-card class="mx-auto pa-4" tile>
+        <v-sheet
+          color="accent"
+          elevation="2"
+          class="ma-2 ma-sm-0 pb-2"
+          tile
+        >
+        <v-card elevation="0" class="mx-auto pa-4" tile>
           <v-card-title>
             <span>Creations for your home garden</span>
           </v-card-title>
@@ -30,13 +36,19 @@
             </p>
           </v-card-text>
         </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
 
     <v-row>
       <v-spacer></v-spacer>
       <v-col class="col-12 col-sm-6">
-        <v-slide-y-transition :hide-on-leave="true">
+          <v-sheet
+            color="accent"
+            elevation="2"
+            class="ma-2 ma-sm-0 pb-2"
+            tile
+          >
           <v-card class="mx-auto pa-4" tile>
             <v-card-title>
               <span>Uniqueness of our products</span>
@@ -60,7 +72,7 @@
               </div>
             </v-card-text>
           </v-card>
-        </v-slide-y-transition>
+          </v-sheet>
       </v-col>
     </v-row>
   </v-container>

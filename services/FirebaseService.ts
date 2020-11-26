@@ -13,13 +13,15 @@ export class FirebaseService {
 
   public async retrieveImageData(folderName: string) {
     try {
-      const querySnapshot = await this.nuxtFire.firestore.collection("images").get({source: 'cache'});
+      let querySnapshot = await this.nuxtFire.firestore.collection("images").get({source: 'cache'});
+      querySnapshot = querySnapshot.empty ? await this.nuxtFire.firestore
+        .collection("images").get({source: 'default'}) : querySnapshot;
       let imageNameList: string[] = []
       querySnapshot.forEach((doc) => {
           imageNameList = doc.get(folderName);
         }
       )
-      const path = folderName !== 'gallery' && folderName !== 'product' ? `landscape/${folderName}` : folderName;
+      const path = folderName !== 'gallery' && folderName !== 'product' && folderName !== 'homepage' ? `landscape/${folderName}` : folderName;
       return await Promise.all(imageNameList.map(async image => await this.nuxtFire.storage.ref(path).child(image).getDownloadURL()));
     } catch (e) {
       console.log(JSON.stringify(e))
@@ -30,9 +32,11 @@ export class FirebaseService {
   public async retrieveLandscapeData() {
     try {
       if (process.env.NODE_ENV === 'production') {
-        let querySnapshot = await this.nuxtFire.firestore.collection("landscape").orderBy("id").get({source: 'cache'});
+        let querySnapshot = await this.nuxtFire.firestore
+          .collection("landscape").orderBy("id").get({source: 'cache'});
         let landscapeDataList: LandscapeInterface[] = []
-        querySnapshot = querySnapshot.empty ? await this.nuxtFire.firestore.collection("landscape").orderBy("id").get({source: 'default'}) : querySnapshot;
+        querySnapshot = querySnapshot.empty ? await this.nuxtFire.firestore
+          .collection("landscape").orderBy("id").get({source: 'default'}) : querySnapshot;
         querySnapshot.forEach((doc) => {
             landscapeDataList.push({
               title: doc.get("title"),
