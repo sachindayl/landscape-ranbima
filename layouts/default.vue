@@ -24,17 +24,17 @@
             v-bind="attrs"
             v-on="on"
           >
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>mdi-web</v-icon>
           </v-btn>
         </template>
 
         <v-list>
           <v-list-item
-            @click="() => {}">
+            @click="storeLanguageSetting('english')">
             <v-list-item-title>English</v-list-item-title>
           </v-list-item>
           <v-list-item
-            @click="() => {}">
+            @click="storeLanguageSetting('sinhala')">
             <v-list-item-title>සිංහල</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -92,6 +92,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'nuxt-property-decorator'
+import localstorage from 'local-storage'
 
 @Component
 export default class Default extends Vue {
@@ -126,6 +127,12 @@ export default class Default extends Vue {
     if(process.env.NODE_ENV === 'production') {
       this.$fire.analytics.logEvent('page_visit', {name: pageName})
     }
+  }
+
+  async storeLanguageSetting(language: string) {
+    console.log(language);
+    await localStorage.setItem("language", language);
+    location.reload();
   }
 }
 </script>
