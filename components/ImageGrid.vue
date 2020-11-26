@@ -42,6 +42,7 @@
 import {Component, Vue, Prop} from "nuxt-property-decorator";
 import {FirebaseService} from "~/services/FirebaseService";
 import ImageViewerDialog from "~/components/ImageViewerDialog.vue";
+const img = require('assets/8.jpg')
 
 @Component({
   components: {ImageViewerDialog}
@@ -63,7 +64,7 @@ export default class ImageGrid extends Vue {
     if (process.env.NODE_ENV === 'production') {
       this.images = await firebaseService.retrieveImageData(this.imageFolder);
     } else {
-      this.images = ["@/assets/8.jpg"]
+      this.images = [img]
     }
     this.loading = false;
   }

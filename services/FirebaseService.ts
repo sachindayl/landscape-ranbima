@@ -1,5 +1,8 @@
 import {NuxtFireInstance} from "@nuxtjs/firebase";
 import {LandscapeInterface} from "~/models/LandscapeInterface";
+import {GrassInterface} from "~/models/GrassInterface";
+
+const img = require('assets/8.jpg')
 
 export class FirebaseService {
   private nuxtFire: NuxtFireInstance;
@@ -10,7 +13,7 @@ export class FirebaseService {
 
   public async retrieveImageData(folderName: string) {
     try {
-      const querySnapshot = await this.nuxtFire.firestore.collection("images").get();
+      const querySnapshot = await this.nuxtFire.firestore.collection("images").get({source: 'cache'});
       let imageNameList: string[] = []
       querySnapshot.forEach((doc) => {
           imageNameList = doc.get(folderName);
@@ -26,26 +29,39 @@ export class FirebaseService {
 
   public async retrieveLandscapeData() {
     try {
-      const querySnapshot = await this.nuxtFire.firestore.collection("landscape").orderBy("id").get();
-      let landscapeDataList: LandscapeInterface[] = []
-      querySnapshot.forEach((doc) => {
-          landscapeDataList.push({
-            title: doc.get("title"),
-            keyword: doc.get("keyword"),
-            before: doc.get("before"),
-            after: doc.get("after"),
-          })
-        }
-      )
+      if (process.env.NODE_ENV === 'production') {
+        let querySnapshot = await this.nuxtFire.firestore.collection("landscape").orderBy("id").get({source: 'cache'});
+        let landscapeDataList: LandscapeInterface[] = []
+        querySnapshot = querySnapshot.empty ? await this.nuxtFire.firestore.collection("landscape").orderBy("id").get({source: 'default'}) : querySnapshot;
+        querySnapshot.forEach((doc) => {
+            landscapeDataList.push({
+              title: doc.get("title"),
+              keyword: doc.get("keyword"),
+              before: doc.get("before"),
+              after: doc.get("after"),
+            })
+          }
+        )
 
-      return await Promise.all(landscapeDataList.map(async data => {
-        return {
-          title: data.title,
-          keyword: data.keyword,
-          before: await this.retrieveImage(`landscape/${data.keyword}`, data.before),
-          after: await this.retrieveImage(`landscape/${data.keyword}`, data.after),
-        }
-      }))
+        return await Promise.all(landscapeDataList.map(async data => {
+          return {
+            title: data.title,
+            keyword: data.keyword,
+            before: await this.retrieveImage(`landscape/${data.keyword}`, data.before),
+            after: await this.retrieveImage(`landscape/${data.keyword}`, data.after),
+          }
+        }))
+      } else {
+        return [
+          {
+            title: "Test title",
+            keyword: "test",
+            before: img,
+            after: img,
+          }
+        ]
+      }
+
 
     } catch (e) {
       console.log(JSON.stringify(e))
@@ -58,4 +74,27 @@ export class FirebaseService {
     return url as string;
   }
 
+  public async retrieveGrass() {
+    try {
+      let querySnapshot = await this.nuxtFire.firestore.collection("grass").get();
+      let grassList: GrassInterface[] = []
+      querySnapshot.forEach((doc) => {
+          grassList.push({
+            title: doc.get("title"),
+            image: doc.get("image"),
+          })
+        }
+      );
+      return await Promise.all(grassList.map(async data => {
+        return {
+          title: data.title,
+          image: await this.retrieveImage('grass', data.image),
+        }
+      }))
+    } catch (e) {
+      console.log(JSON.stringify(e))
+      return Promise.reject(e)
+    }
+
+  }
 }

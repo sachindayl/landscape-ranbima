@@ -52,7 +52,7 @@ export default {
   },
 
   firestore: {
-    memoryOnly: false, // default
+    memoryOnly: true, // default
     chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
     enablePersistence: true,
     emulatorPort: 5600,

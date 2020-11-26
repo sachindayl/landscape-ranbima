@@ -38,8 +38,28 @@
         class="col-12 col-sm-4"
       >
         <v-card class="card-style pa-4 ma-2 ma-sm-0" tile>
-          <v-card-title> {{ card.title }} </v-card-title>
+          <v-card-title> {{ card.title }}</v-card-title>
           <v-card-text>{{ card.text }}</v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col class="col-12">
+        <v-card tile>
+          <v-card-title>Why do we differ from others?</v-card-title>
+          <v-card-text>
+            <p>When Ranbima Art Gallery does gardening decor we follow a very special process that you can not see from
+              other companies.</p>
+            <div>
+              <ul v-for="item in processList" :key="item">
+                <li>{{ item }}</li>
+              </ul>
+            </div>
+            <div class="pt-4">
+              <p>According to your wish and dream, you can see well in advance the garden art before it is finished.</p>
+            </div>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -47,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
 
 @Component
 export default class Index extends Vue {
@@ -56,6 +76,7 @@ export default class Index extends Vue {
       title: "Home"
     }
   }
+
   absolute = true
   colors = [
     'indigo',
@@ -88,6 +109,15 @@ export default class Index extends Vue {
   get cardRows(): number {
     return Math.ceil(this.cardData.length / 3)
   }
+
+  processList = [
+    'First, we take photographs of your garden.',
+    'Secondly, we design your garden in the most natural way through Digital Technology.',
+    'Without diluting through photographs we show prepared a few photographs',
+    'Through these photographs, you can imagine what Ranbima Art Gallery expects to set for you',
+    'Then you can see how we design and plan garden pots, various kinds of natural and beautiful plants,\n' +
+    'flower plants, grass, etc. and arrange them in proper places'
+  ]
 }
 </script>
 
