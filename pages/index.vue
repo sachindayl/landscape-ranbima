@@ -64,9 +64,19 @@
           class="ma-2 ma-sm-0 pb-2"
           tile
         >
-          <v-card elevation="0" class="pa-4" tile min-height="250">
-            <v-card-title> {{ card.title }}</v-card-title>
-            <v-card-text>{{ card.text }}</v-card-text>
+          <v-card elevation="0" class="pa-4" tile min-height="350px">
+            <v-row>
+              <v-col>
+                <v-img
+                  class="mx-auto"
+                  :src="card.image"
+                  :aspect-ratio="1"
+                  max-height="100px"
+                  max-width="100px"></v-img>
+              </v-col>
+            </v-row>
+            <v-card-title class="align-center justify-center text-center"> {{ card.title }}</v-card-title>
+            <v-card-text class="align-center justify-center text-center">{{ card.text }}</v-card-text>
           </v-card>
         </v-sheet>
 
@@ -107,6 +117,9 @@ import {FirebaseService} from "~/services/FirebaseService";
 
 @Component
 export default class Index extends Vue {
+  durable = require('@/assets/durable.png');
+  medal = require('@/assets/medal.png');
+  palette = require('@/assets/palette.png');
   images: string[] = []
   languageConfig = "english"
 
@@ -130,16 +143,19 @@ export default class Index extends Vue {
       projectsMessage: "We've managed over 2000 projects. We're ready to take care of yours.",
       cardData: [
         {
+          image: this.medal,
           title: '100% Reinforced Quality',
           text:
             'Our products are made from 100% reinforced concrete which is as twice as strong than ordinary concrete mixture.',
         },
         {
+          image: this.durable,
           title: 'Guaranteed Resistance',
           text:
             'Resistance against any salty or chemical substance and fail-safe external coating.',
         },
         {
+          image: this.palette,
           title: 'Beautiful Colors',
           text:
             'You like a colour? We got it! Our clients can pick colours of their choice from wide ranging palette.',
@@ -159,23 +175,26 @@ export default class Index extends Vue {
         text2: "We will create a design for your garden well in advance, according to your wishes and dreams."
       }
     } : {
-      slogan: "ඔබේ උද්‍යානය නැවත ප්‍රතිනිර්මාණය කරන්න.",
-      projectsMessage: "අපි ව්‍යාපෘති 2000 කට වඩා කළමනාකරණය කර ඇත්තෙමු. අපි ඔබේ වත්ත බලාගන්න සූදානම්.",
+      slogan: "ඔබේ ගෙ උයන නැවත ප්‍රතිනිර්මාණය කරන්න.",
+      projectsMessage: "අපි ව්‍යාපෘති 2000 කට වඩා කළමනාකරණය කර ඇත්තෙමු. අපි ඔබේ උද්‍යානය බලාගන්න සූදානම්.",
       cardData: [
         {
+          image: this.medal,
           title: '100% ශක්තිමත් කළ ගුණාත්මකභාවය',
           text:
             'අපගේ නිෂ්පාදන සාමාන්‍ය කොන්ක්‍රීට් මිශ්‍රණයට වඩා දෙගුණයක් ශක්තිමත් වන 100% ශක්තිමත් කරන ලද කොන්ක්‍රීට් වලින් සාදා ඇත.',
         },
         {
-          title: 'සහතික කළ ප්රතිරෝධය',
+          image: this.durable,
+          title: 'සහතික කළ ඔරොත්තුව',
           text:
-            'ඕනෑම ලුණු හෝ රසායනික ද්‍රව්‍යයකට ප්‍රතිරෝධය සහ ආරක්ෂිත බාහිර ආලේපනය.',
+            'ඕනෑම ලවණ හා රසායනික ද්‍රව්‍ය වලට 100% ක්ම ඔරොත්තු දෙන ආරක්ෂිත බාහිර ආලේපනය.',
         },
         {
+          image: this.palette,
           title: 'ලස්සන වර්ණ',
           text:
-            'ඔබ වර්ණයක් සඳහා කැමතිද? අප ගාව එය ඇත! අපගේ සේවාදායකයින්ට පුළුල් පරාසයක සිට ඔවුන්ගේ කැමැත්ත පරිදි වර්ණ තෝරා ගත හැකිය.',
+            'ඔබ වර්ණයක් සඳහා කැමතිද? අප ගාව එය ඇත! අපගේ සේවාදායකයින්ට මතුපිට ආලේපිත වර්ණ අසීමිත ප්‍රමාණයකින් ලබා ගත හැක.',
         }
       ],
       differCardText: {

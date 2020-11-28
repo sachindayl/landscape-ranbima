@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar absolute app>
+    <v-app-bar app>
       <v-app-bar-nav-icon
         v-if="isMobile"
         @click="drawer = !drawer"
@@ -81,7 +81,7 @@
         <v-divider/>
         <v-card-text class="text-center">
           <span
-          >&copy; {{ new Date().getFullYear() }} Powered by Technomate
+          >&copy; {{ new Date().getFullYear() }} Crafted by Technomate
             Software</span
           >
         </v-card-text>
