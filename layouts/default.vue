@@ -2,8 +2,8 @@
   <v-app dark>
     <v-app-bar app>
       <v-app-bar-nav-icon
-        v-if="isMobile"
-        @click="drawer = !drawer"
+          v-if="isMobile"
+          @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-toolbar-title v-text="title"/>
       <v-spacer></v-spacer>
@@ -15,14 +15,14 @@
         <v-btn text tile @click="logEvent('landscaping')" to="/landscaping" nuxt>Landscaping</v-btn>
       </div>
       <v-menu
-        left
-        bottom
+          left
+          bottom
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
+              icon
+              v-bind="attrs"
+              v-on="on"
           >
             <v-icon>mdi-web</v-icon>
           </v-btn>
@@ -30,12 +30,12 @@
 
         <v-list>
           <v-list-item
-            @click="storeLanguageSetting('english')">
-            <v-list-item-title>English</v-list-item-title>
+              @click="storeLanguageSetting(language_sinhala)">
+            <v-list-item-title>සිංහල</v-list-item-title>
           </v-list-item>
           <v-list-item
-            @click="storeLanguageSetting('sinhala')">
-            <v-list-item-title>සිංහල</v-list-item-title>
+              @click="storeLanguageSetting(language_english)">
+            <v-list-item-title>English</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -93,6 +93,7 @@
 <script lang="ts">
 import {Component, Vue} from 'nuxt-property-decorator'
 import localstorage from 'local-storage'
+import {LANG_EN, LANG_SI} from "~/config/constants";
 
 @Component
 export default class Default extends Vue {
@@ -111,6 +112,8 @@ export default class Default extends Vue {
       to: '/inspire',
     },
   ]
+  language_sinhala = LANG_SI
+  language_english = LANG_EN
 
   miniVariant = false
   title = 'Landscape Ranbima'
@@ -124,7 +127,7 @@ export default class Default extends Vue {
   }
 
   logEvent(pageName: string) {
-    if(process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       this.$fire.analytics.logEvent('page_visit', {name: pageName})
     }
   }
