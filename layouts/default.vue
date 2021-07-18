@@ -62,9 +62,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <v-container>
         <nuxt/>
-      </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app dark padless>
       <v-card flat tile class="col-12">
