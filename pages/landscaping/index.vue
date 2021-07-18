@@ -6,77 +6,80 @@
       indeterminate
       color="accent"
     ></v-progress-linear>
-    <v-row>
-      <v-col class="col-12">
-        <h2>{{ dataSet.projects.title }}</h2>
-        <div class="pt-4">
-          <p>{{ dataSet.projects.text }}</p>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col v-for="(land, index) in landscapeList" :key="land + index" class="col-12 col-sm-6">
-        <v-sheet
-          color="accent"
-          elevation="2"
-          class="pb-2"
-          tile
-        >
-          <v-card elevation="0" class="pa-4" :to="{path: '/landscaping/browse', query: {album:land.keyword}}" tile>
-            <v-row>
-              <v-col class="col-6">
-                <v-img
-                  :src="land.before"
+    <v-container>
+      <v-row>
+        <v-col class="col-12">
+          <h2>{{ dataSet.projects.title }}</h2>
+          <div class="pt-4">
+            <p>{{ dataSet.projects.text }}</p>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col v-for="(land, index) in landscapeList" :key="land + index" class="col-12 col-sm-6">
+          <v-sheet
+              color="accent"
+              elevation="2"
+              class="pb-2"
+              tile
+          >
+            <v-card elevation="0" class="pa-4" :to="{path: '/landscaping/browse', query: {album:land.keyword}}" tile>
+              <v-row>
+                <v-col class="col-6">
+                  <v-img
+                      :src="land.before"
+                      max-height="175px"
+                      max-width="250px"
+                      aspect-ratio="1"
+                      contain
+                  ></v-img>
+                </v-col>
+                <v-col class="col-6">
+                  <v-img
+                      :src="land.after"
+                      max-height="175px"
+                      max-width="250px"
+                      aspect-ratio="1"
+                      contain
+                  ></v-img>
+                </v-col>
+              </v-row>
+              <v-card-title>{{ land.title }}</v-card-title>
+            </v-card>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="col-12">
+          <h2>{{ dataSet.grass.title }}</h2>
+          <div class="pt-4">
+            <p>{{ dataSet.grass.text }}</p>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="col-6 col-sm-3" v-for="(grass, index) in grassList" :key="grass+index">
+          <v-sheet
+              color="accent"
+              elevation="2"
+              class="pb-2"
+              tile
+          >
+            <v-card elevation="0" class="pa-4" min-height="300px" tile>
+              <v-img
+                  :src="grass.image"
                   max-height="175px"
                   max-width="250px"
                   aspect-ratio="1"
                   contain
-                ></v-img>
-              </v-col>
-              <v-col class="col-6">
-                <v-img
-                  :src="land.after"
-                  max-height="175px"
-                  max-width="250px"
-                  aspect-ratio="1"
-                  contain
-                ></v-img>
-              </v-col>
-            </v-row>
-            <v-card-title>{{ land.title }}</v-card-title>
-          </v-card>
-        </v-sheet>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col class="col-12">
-        <h2>{{ dataSet.grass.title }}</h2>
-        <div class="pt-4">
-          <p>{{ dataSet.grass.text }}</p>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col class="col-6 col-sm-3" v-for="(grass, index) in grassList" :key="grass+index">
-        <v-sheet
-          color="accent"
-          elevation="2"
-          class="pb-2"
-          tile
-        >
-          <v-card elevation="0" class="pa-4" min-height="300px" tile>
-            <v-img
-              :src="grass.image"
-              max-height="175px"
-              max-width="250px"
-              aspect-ratio="1"
-              contain
-            ></v-img>
-            <v-card-title>{{ grass.title }}</v-card-title>
-          </v-card>
-        </v-sheet>
-      </v-col>
-    </v-row>
+              ></v-img>
+              <v-card-title>{{ grass.title }}</v-card-title>
+            </v-card>
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+
   </div>
 </template>
 

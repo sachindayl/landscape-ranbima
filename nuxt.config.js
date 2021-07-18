@@ -70,8 +70,8 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.green.darken1,
+          primary: "#35552F",
+          accent: "#43A047",
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,

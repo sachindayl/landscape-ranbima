@@ -1,5 +1,7 @@
 <template>
-  <ImageGrid :image-folder="'gallery'"></ImageGrid>
+  <v-container>
+    <ImageGrid :image-folder="'gallery'"></ImageGrid>
+  </v-container>
 </template>
 
 <script lang="ts">
